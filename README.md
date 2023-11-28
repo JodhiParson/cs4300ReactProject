@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# Recipe Finder
+
+This project was created by Jodhi Parson, Paul Wang, Ben Jacobs, and Joseph Nguyen.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

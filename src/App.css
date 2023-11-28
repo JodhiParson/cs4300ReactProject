@@ -1,38 +1,73 @@
-.App {
-  text-align: center;
-}
+ @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+ @import url('https://fonts.googleapis.com/css?family=Libre+Franklin');
+ @import url('https://fonts.googleapis.com/css?family=Oxygen');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+ .App {
+   text-align: center;
+ }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+ .App-logo {
+   height: 40vmin;
+   pointer-events: none;
+ }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+ @media (prefers-reduced-motion: no-preference) {
+   .App-logo {
+     animation: App-logo-spin infinite 20s linear;
+   }
+ }
 
-.App-link {
-  color: #61dafb;
-}
+ .App-header {
+   background-color: #282c34;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   font-size: calc(10px + 2vmin);
+   color: white;
+ }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+ .App-link {
+   color: #61dafb;
+ }
+
+ @keyframes App-logo-spin {
+   from {
+     transform: rotate(0deg);
+   }
+
+   to {
+     transform: rotate(360deg);
+   }
+ }
+
+ /*login*/
+ body {
+   background-color: whitesmoke;
+ }
+
+ .loginHero {
+   color: black;
+   font-family: 'Libre Franklin';
+   font-size: 60px;
+ }
+
+ .hero-wrapper {
+   display: flex;
+   flex-direction: column;
+   min-height: 81vh;
+   justify-content: center;
+   align-items: center;
+ }
+ .button {
+   margin: 20px;
+   font-family: 'Libre Franklin';
+ }
+
+ .loginWrapper {
+   text-align: center;
+   font-size: 20px;
+ }
+
+

@@ -1,0 +1,91 @@
+/* Navbar.css */
+
+/* nav {
+    width: auto;
+    background-color: #3D3C42;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .brand {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    max-width: 50%; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+  
+  .navLinks {
+    list-style: none;
+    display: flex;
+  }
+  
+  .navItems {
+    padding: 10px 15px;
+    color: white;
+  }
+  
+  .navItems a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .navItems a:hover {
+    text-decoration: underline;
+  } */
+
+    /* Navbar.css */
+  
+    nav {
+      background-color: #3D3C42;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 15px;
+    }
+  
+    .navLinks {
+      margin: 0px;
+      font-size: 1.5em;
+      text-decoration: none;
+    }
+  
+    .navLinks a:hover {
+      background-color: #1b1c1e;
+      transition: background-color 0.2s;
+      border-radius: 5px;
+    }
+  
+    .brand {
+      color: white;
+      font-size: 1.5em;
+      font-weight: bold;
+      max-width: 50%;
+      /* Set a maximum width for the brand text */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* Add ellipsis (...) if the text overflows */
+    }
+  
+    .navLinks {
+      list-style: none;
+      display: flex;
+    }
+  
+    .navItems {
+      padding: 10px 15px;
+      color: white;
+    }
+  
+    .navItems a {
+      text-decoration: none;
+      color: white;
+    }
+  
+    .navItems a:hover {
+      text-decoration: underline;
+    }
+  
