@@ -9,6 +9,7 @@ const RecipeList = (props) => {
         {props.recipes.map((recipe) => (
           <div key={recipe.id} className="recipe-item">
             <Recipe
+              id={recipe._id}
               img={recipe.image}
               recipe={recipe.title}
               ingredient={recipe.description}
