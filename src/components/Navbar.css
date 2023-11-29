@@ -1,43 +1,5 @@
 /* Navbar.css */
 
-/* nav {
-    width: auto;
-    background-color: #3D3C42;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-  }
-  
-  .brand {
-    color: white;
-    font-size: 1.5em;
-    font-weight: bold;
-    max-width: 50%; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-  }
-  
-  .navLinks {
-    list-style: none;
-    display: flex;
-  }
-  
-  .navItems {
-    padding: 10px 15px;
-    color: white;
-  }
-  
-  .navItems a {
-    text-decoration: none;
-    color: white;
-  }
-  
-  .navItems a:hover {
-    text-decoration: underline;
-  } */
-
-    /* Navbar.css */
   
     nav {
       background-color: #3D3C42;

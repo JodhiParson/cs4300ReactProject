@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import Button from './Button';
-import axios from 'axios';
+import './LoginForm.css';
 
 const LoginForm = ({ onLogin }) => {
   const [userName, setUserName] = useState('');
@@ -38,24 +38,34 @@ const LoginForm = ({ onLogin }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>UserName</label>
-      <input
-        id="recipe"
-        type="text"
-        value={userName}
-        onChange={handleNameChange}
-      />
+    <form className="login" onSubmit={handleSubmit}>
+      <h2 className="login-welcome">Welcome!</h2>
+      <div className="user">
+        <label className="login-label">UserName:</label>
+        <input
+          className="login-input"
+          id="Username"
+          type="text"
+          value={userName}
+          onChange={handleNameChange}
+          placeholder='Username'
+        />
+      </div>
       <br />
-      <label>Password</label>
-      <input
-        id="Password"
-        type="text"
-        value={password}
-        onChange={handlePassword}
-      />
-      <Button type="submit">Login</Button> 
-       </form>
+      <div className="pass">
+        <label className="login-label">Password:</label>
+        <input
+          className="login-input"
+          id="Password"
+          type="password"
+          value={password}
+          onChange={handlePassword}
+          placeholder='Password'
+        />
+      </div>
+
+      <Button type="submit">Login</Button>
+    </form>
   );
 };
 

@@ -1,15 +1,31 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import Button from './Button';
 import axios from 'axios';
 import './RecipeForm.css';
 
+const UpdateRecipeForm = ({ onUpdateRecipe }) => {
+    const {id} = useParams();
+    const [recipeName, setRecipeName] = useState('');
+    const [ingredient, setIngredient] = useState('');
+    const [image, setImage] = useState('');
+    const [instruction, setInstruction] = useState('');
 
-const RecipeForm = ({ onAddRecipe }) => {
-  const [recipeName, setRecipeName] = useState('');
-  const [ingredient, setIngredient] = useState('');
-  const [image, setImage] = useState('');
-  const [instruction, setInstruction] = useState('');
+    useEffect(() => {
+      // Fetch the recipe data based on the id parameter when the component mounts
+      axios.get(`http://localhost:8081/api/items/${id}`)
+        .then(result => {
+          const { title, description, image, instruction } = result.data;
+          setRecipeName(title);
+          setIngredient(description);
+          setImage(image);
+          setInstruction(instruction);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }, [id]);
 
   const handleNameChange = (event) => {
     setRecipeName(event.target.value);
@@ -42,10 +58,9 @@ const RecipeForm = ({ onAddRecipe }) => {
       instruction: instruction
     };
     
-    axios.post('http://localhost:8081/api/items', newRecipe);
+    axios.put(`http://localhost:8081/api/items/${id}`, newRecipe);
 
-
-    onAddRecipe(newRecipe);
+    onUpdateRecipe(newRecipe);
     console.log('New Recipe:', newRecipe);
 
 
@@ -89,4 +104,4 @@ const RecipeForm = ({ onAddRecipe }) => {
   );
 };
 
-export default RecipeForm;
+export default UpdateRecipeForm;

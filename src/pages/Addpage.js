@@ -1,6 +1,5 @@
 
 import React, { useState } from "react";
-import HomeHero from '../components/HomeHero';
 import RecipeForm from '../components/RecipeForm';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
@@ -15,8 +14,7 @@ const Addpage = ({ onAddRecipe }) => {
 
   return (
     <div>
-      <HomeHero />
-      <RecipeForm onAddRecipe={handleAddRecipe} />
+      <RecipeForm onAddRecipe={handleAddRecipe} className="add-form" />
       <Footer />
     </div>
   );
