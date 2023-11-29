@@ -16,7 +16,6 @@ const Updatepage = ({ onUpdateRecipe }) => {
 
   return (
     <div>
-      <HomeHero />
       <UpdateRecipeForm onUpdateRecipe={handleUpdateRecipe} />
       <Footer />
     </div>
