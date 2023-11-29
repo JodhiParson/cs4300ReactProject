@@ -12,7 +12,9 @@ const HomeAuth = ({ recipes, onAddRecipe }) => {
 
   return (
     <div>
-      <HomeHero />
+      <div className="home-hero">
+        <HomeHero />
+      </div>
       <RecipeList recipes={recipes} onRemoveRecipe={handleRemoveRecipe} />
       <Footer />
     </div>

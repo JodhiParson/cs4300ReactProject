@@ -25,8 +25,8 @@
 // export default Addpage;
 
 
-import React, { useState } from "react";
-import Hero from "../components/Hero";
+// import React, { useState } from "react";
+// import Hero from "../components/Hero";
 import LoginForm from "../components/LoginForm";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
@@ -43,7 +43,7 @@ const Addpage = ({ onLogin }) => {
   return (
     <div className="loginWrapper">
       <div className="hero-wrapper">
-        <Hero className="loginHero" />
+        {/* <Hero className="loginHero" /> */}
         <LoginForm onLogin={handleLogin} />
       </div>
       <Footer />
