@@ -1,107 +1,7 @@
-/** 
-import React, { useState } from "react";
-
-const RecipeForm = ({ onAddRecipe, onCancel }) => {
-  const [recipeName, setRecipeName] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
-  const [image, setImage] = useState("");
-
-  const handleAddRecipe = () => {
-    if (!recipeName || !ingredients || !instructions) {
-      alert("Please fill in all fields");
-      return;
-    }
-
-    const newRecipe = {
-      name: recipeName,
-      ingredients: ingredients,
-      instructions: instructions,
-      image: image,
-    };
-
-    onAddRecipe(newRecipe);
-
-    // Clear form fields after adding recipe
-    setRecipeName("");
-    setIngredients("");
-    setInstructions("")
-    setImage("");
-  };
-
-  const handleCancel = () => {
-    // Clear form fields on cancel
-    setRecipeName("");
-    setIngredients("");
-    setInstructions("")
-    setImage("");
-
-    // Trigger onCancel callback if provided
-    if (onCancel) {
-      onCancel();
-    }
-  };
-  const handleImageChange = (e) => {
-    setImage(e.target.value);
-  };
-
-  return (
-    <form>
-      <div className="recipe-form">
-        <h3>Add a New Recipe</h3>
-        <div>
-          <label htmlFor="recipeName">Recipe Name:</label>
-          <input
-            type="text"
-            id="recipeName"
-            value={recipeName}
-            onChange={(e) => setRecipeName(e.target.value)}
-          />
-        </div>
-        <div>
-        <label htmlFor="image">Image URL:</label>
-          <input
-            type="text"
-            id="image"
-            value={image}
-            onChange={handleImageChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="ingredients">Ingredients:</label>
-          <textarea
-            id="ingredients"
-            value={ingredients}
-            onChange={(e) => setIngredients(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="instructions">Instructions:</label>
-          <textarea
-            id="instructions"
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
-          />
-        </div>
-        <button type="button" onClick={handleAddRecipe}>
-          Add Recipe
-        </button>
-        <button type="button" onClick={handleCancel}>
-          Cancel
-        </button>
-      </div>
-    </form>
-  );
-};
-
-export default RecipeForm;
-
-*/
-
-
 import React from 'react';
 import {useState} from 'react';
 import Button from './Button';
+import axios from 'axios';
 
 const RecipeForm = ({ onAddRecipe }) => {
   const [recipeName, setRecipeName] = useState('');
@@ -132,15 +32,20 @@ const RecipeForm = ({ onAddRecipe }) => {
       return;
     }
 
+
     const newRecipe = {
-      id: Math.random().toString(),
-      name: recipeName,
-      ingredient: ingredient,
-      img: image,
-      instruction: instruction,
+      title: recipeName,
+      description: ingredient,
+      image: image,
+      instruction: instruction
     };
+    
+    axios.post('http://localhost:8081/api/items', newRecipe);
+
 
     onAddRecipe(newRecipe);
+    console.log('New Recipe:', newRecipe);
+
 
     // Clear form fields after adding recipe
     setRecipeName('');
