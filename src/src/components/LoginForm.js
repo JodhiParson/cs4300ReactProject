@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import Button from './Button';
+import axios from 'axios';
 
 const LoginForm = ({ onLogin }) => {
   const [userName, setUserName] = useState('');
@@ -49,7 +50,7 @@ const LoginForm = ({ onLogin }) => {
       <label>Password</label>
       <input
         id="Password"
-        type="password"
+        type="text"
         value={password}
         onChange={handlePassword}
       />
