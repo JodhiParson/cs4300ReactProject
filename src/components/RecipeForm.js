@@ -57,35 +57,57 @@ const RecipeForm = ({ onAddRecipe }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Recipe</label>
-      <input
-        id="recipe"
-        type="text"
-        value={recipeName}
-        onChange={handleNameChange}
-      />
-      <br />
-      <label>Ingredient</label>
-      <input
-        id="Ingredient"
-        type="text"
-        value={ingredient}
-        onChange={handleIngredientChange}
-      />
-      <br />
-      <label>Image</label>
-      <input id="img" type="text" value={image} onChange={handleImageChange} />
-      <br />
-      <label>Instruction</label>
-      <input
-        id="Instruction"
-        type="text"
-        value={instruction}
-        onChange={handleInstructionChange}
-      />
-      <Button type="submit">Add Recipe</Button> 
-       </form>
+<div className="add-wrapper">
+      <form className="add-form" onSubmit={handleSubmit}>
+        <h2 className="add-header">Create Your Recipe!</h2>
+        <label className="add-label">Name Your Recipe:</label>
+        <input
+          className="recipe-name"
+          id="recipe"
+          type="text"
+          value={recipeName}
+          onChange={handleNameChange}
+          placeholder="Recipe Name"
+        />
+        <br />
+        <label className="add-label">List the Ingredients:</label>
+        <textarea
+          className="ingredients"
+          id="Ingredient"
+          type="text"
+          value={ingredient}
+          onChange={handleIngredientChange}
+          placeholder="Ingredients &#10;1. &#10;2. &#10;3."
+          rows={6}
+        />
+        <br />
+        <label className="add-label">How to Prepare:</label>
+        <textarea
+          className="instructions"
+          id="Instruction"
+          type="text"
+          value={instruction}
+          onChange={handleInstructionChange}
+          placeholder="Preparation..."
+          rows={8}
+        />
+        <br />
+        <label className="add-label">Image:</label>
+        <input
+          className="add-image"
+          id="img"
+          type="text"
+          value={image}
+          onChange={handleImageChange}
+          placeholder="Enter Image URL"
+        />
+        <div className="button-wrapper">
+          <Button className="add-button" type="submit">
+            Add Recipe
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -35,7 +35,7 @@ const Recipe = (props) => {
         <img src={props.img} className="recipe-img" alt={props.recipe} />
         <div className="recipe-info">
           <h2>{props.recipe}</h2>
-          <p> Ingredietns: {props.ingredient}</p> <br></br>
+          <p> Ingredients: {props.ingredient}</p> <br></br>
           <p>Instruction: {props.instruction}</p>
           <Link to={'/Updatepage'}><button onClick={(e) => handleUpdate(props.id)}>Update</button></Link>
           <button onClick={(e) => handleDelete(props.id)}>Delete </button>
