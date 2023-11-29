@@ -48,6 +48,7 @@ const LoginForm = ({ onLogin }) => {
           type="text"
           value={userName}
           onChange={handleNameChange}
+          placeholder='Username'
         />
       </div>
       <br />
@@ -56,9 +57,10 @@ const LoginForm = ({ onLogin }) => {
         <input
           className="login-input"
           id="Password"
-          type="text"
+          type="password"
           value={password}
           onChange={handlePassword}
+          placeholder='Password'
         />
       </div>
 
