@@ -49,7 +49,7 @@ const LoginForm = ({ onLogin }) => {
       <label>Password</label>
       <input
         id="Password"
-        type="text"
+        type="password"
         value={password}
         onChange={handlePassword}
       />
