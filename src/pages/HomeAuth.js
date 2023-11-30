@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeHero from '../components/HomeHero';
-import RecipeList from '../components/RecipeList';
+import UpdatedRecipeList from '../components/UpdatedRecipeList';
 import Footer from '../components/Footer';
 
 const HomeAuth = ({ recipes, onAddRecipe }) => {
@@ -15,7 +15,7 @@ const HomeAuth = ({ recipes, onAddRecipe }) => {
       <div className="home-hero">
         <HomeHero />
       </div>
-      <RecipeList recipes={recipes} onRemoveRecipe={handleRemoveRecipe} />
+      <UpdatedRecipeList recipes={recipes} onRemoveRecipe={handleRemoveRecipe} />
       <Footer />
     </div>
   );
