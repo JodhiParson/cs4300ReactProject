@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import HomeAuth from './pages/HomeAuth';
 import Addpage from './pages/Addpage';
 import LoginPage from './pages/LoginPage';
-import HomeNavbar from './components/HomeNavbar';
+import HomeNavbar from './components/Navbar';
 import HomeAuthNavbar from './components/HomeAuthNavbar';
 import AddpageNavbar from './components/AddpageNavbar';
 import LoginPageNavbar from './components/LoginPageNavbar';
