@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import HomeAuth from './pages/HomeAuth';
 import Addpage from './pages/Addpage';
 import LoginPage from './pages/LoginPage';
+import SignUpPage from "./components/SignUpPage";
 import HomeNavbar from './components/Navbar';
 import HomeAuthNavbar from './components/HomeAuthNavbar';
 import AddpageNavbar from './components/AddpageNavbar';
@@ -27,6 +28,10 @@ function App() {
   const handleLogin = (newUser) => {
     setUsers([...users, newUser]);
   };
+
+  const handleSignUp = (newUser) => {
+    setUsers([...users, newUser]);
+  }
 
   // useEffect to fetch data when the component mounts
   useEffect(() => {
@@ -80,6 +85,15 @@ function App() {
               <>
                 <LoginPageNavbar />
                 <LoginPage onLogin={handleLogin} />
+              </>
+            }
+          />
+          <Route
+            path="/SignUpPage"
+            element={
+              <>
+                <LoginPageNavbar />
+                <SignUpPage onLogin={handleSignUp} />
               </>
             }
           />
