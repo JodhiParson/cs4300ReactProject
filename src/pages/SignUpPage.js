@@ -32,11 +32,11 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 
-const Addpage = ({ onLogin }) => {
+const Addpage = ({ onSignUp }) => {
   const navigate = useNavigate();
 
   const handleSignUp = (newSignUp) => {
-    onLogin(newLogin);
+    onSignUp(newSignUp);
     navigate("/HomeAuth");
   };
 
@@ -44,7 +44,7 @@ const Addpage = ({ onLogin }) => {
     <div className="loginWrapper">
       <div className="hero-wrapper">
         <Hero className="loginHero" />
-        <LoginForm onLogin={handleSignup} />
+        <SignUpForm onSignUp={handleSignUp} />
       </div>
       <Footer />
     </div>

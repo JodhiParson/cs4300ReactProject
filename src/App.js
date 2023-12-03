@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import HomeAuth from './pages/HomeAuth';
 import Addpage from './pages/Addpage';
 import LoginPage from './pages/LoginPage';
-import SignUpPage from "./components/SignUpPage";
+import SignUpPage from "./pages/SignUpPage";
 import HomeNavbar from './components/Navbar';
 import HomeAuthNavbar from './components/HomeAuthNavbar';
 import AddpageNavbar from './components/AddpageNavbar';
@@ -93,7 +93,7 @@ function App() {
             element={
               <>
                 <LoginPageNavbar />
-                <SignUpPage onLogin={handleSignUp} />
+                <SignUpPage onSignUp={handleSignUp} />
               </>
             }
           />

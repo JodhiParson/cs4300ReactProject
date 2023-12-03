@@ -1,11 +1,20 @@
-import React from 'react';
-import {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import { Form, Button, Card, Alert, Container } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import UserContext from "../context/UserContext";
+import axios from 'axios';
 import Button from './Button';
 
 const SignUpForm = ({ onLogin }) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setconfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const {setUserData } = useContext(UserContext);
 
   const handleNameChange = (event) => {
     setUserName(event.target.value);
