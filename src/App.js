@@ -9,9 +9,14 @@ import HomeNavbar from './components/Navbar';
 import HomeAuthNavbar from './components/HomeAuthNavbar';
 import AddpageNavbar from './components/AddpageNavbar';
 import LoginPageNavbar from './components/LoginPageNavbar';
+import axios from 'axios';
 import './App.css';
 
 function App() {
+  const [userData, setUserdata] = useState({
+    token: undefined,
+    user: undefined,
+  });
   // Initialize recipes state with preset recipes
   const [recipes, setRecipes] = useState([
     {
@@ -33,21 +38,33 @@ function App() {
     setUsers([...users, newUser]);
   }
 
-  // useEffect to fetch data when the component mounts
   useEffect(() => {
-    // Fetch recipes
-    fetch("/api/recipes")
-      .then((response) => response.json())
-      .then((data) => setRecipes(data))
-      .catch((error) => console.error("Error fetching recipes:", error));
+    const checkLoggedIn = async () => {
+    let token = localStorage.getItem("auth-token");
+    if(token == null) {
+      localStorage.setItem("auth-token", "");
+      token = "";
+    }
+    const tokenResponse = await axios.post(
+      "https://localhost:8081/tokenIsValid",
+      null,
+      {headers: {"x-auth-token": token } }
+    );
+    if (tokenResponse.data) {
+      const userRes = await axios.get("https://localhost:8081/", {
+        headers: {"x-auth-token": token },
+      });
+      setUserdata({
+        token,
+        user: userRes.data,
+      });
+    }
+  };
+    checkLoggedIn();
+  }, []);
 
-    // Fetch users
-    fetch("/api/users")
-      .then((response) => response.json())
-      .then((data) => setUsers(data))
-      .catch((error) => console.error("Error fetching users:", error));
-  }, []); // Empty dependency array ensures the effect runs only once on mount
-
+  // useEffect to fetch data when the component mounts
+  
   return (
     <Router>
       <div>
@@ -101,15 +118,8 @@ function App() {
       </div>
     </Router>
   );
-}
+          };
 
 
 export default App;
-
-
-
-
-
-
-
-
+          

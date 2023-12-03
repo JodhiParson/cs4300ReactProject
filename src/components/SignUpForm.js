@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import axios from 'axios';
-import Button from './Button';
 
 const SignUpForm = ({ onLogin }) => {
   const [userName, setUserName] = useState('');
@@ -29,31 +28,52 @@ const SignUpForm = ({ onLogin }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (userName.trim() === '') {
-      alert('Enter your SignUp Information!!');
-      return;
+    setLoading(true);
+    try {
+
+      const newUser = { email, password, confirmPassword, username };
+      
+      axios.post("https://localhost:8081/api/users/signup", newUser);
+      const loginRes = axios.post("https://localhost:8081/api/users/login", {
+        email,
+        password,
+      });
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem("auth-token", loginRes.data.token);
+      setLoading(false);
+      navigate('/');
+    } catch (err) {
+      setLoading(false);
+      err.response.data.msg && setError(err.response.data.msg);
     }
-
-  if (password !==confirmPassword) {
-    alert('Passwords do not match');
-    return;
   }
+  //   if (userName.trim() === '') {
+  //     alert('Enter your SignUp Information!!');
+  //     return;
+  //   }
 
-    const newUser = {
-      id: Math.random().toString(),
-      user: userName,
-      password: password,
+  // if (password !==confirmPassword) {
+  //   alert('Passwords do not match');
+  //   return;
+  // }
 
-    };
+  //   const newUser = {
+  //     id: Math.random().toString(),
+  //     user: userName,
+  //     password: password,
 
-    onLogin(newUser);
+  //   };
 
-    // Clear form fields after adding recipe
-    setUserName('');
-    setPassword('');
-    setConfirmPassword('');
+  //   onLogin(newUser);
 
-  };
+  //   // Clear form fields after adding recipe
+  //   setUserName('');
+  //   setPassword('');
+  //   setConfirmPassword('');
+
 
   return (
     <Container
@@ -106,6 +126,5 @@ const SignUpForm = ({ onLogin }) => {
     </div>
 </Container>
 );
-};
-
+  };
 export default SignUpForm;

@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8081;
 
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
@@ -21,7 +21,7 @@ mongoose.connect(conn_str, {
 
 mongoose.connection
   .once("open", () => {
-    console.log("MongoDB Connection Succeeded @ localhost:3000");
+    console.log("MongoDB Connection Succeeded @ localhost:8081");
   })
   .on("error", (error) => {
     console.log(`Error in DB Connection: ${error}`);
