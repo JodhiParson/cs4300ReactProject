@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import HomeAuth from './pages/HomeAuth';
@@ -27,6 +27,21 @@ function App() {
   const handleLogin = (newUser) => {
     setUsers([...users, newUser]);
   };
+
+  // useEffect to fetch data when the component mounts
+  useEffect(() => {
+    // Fetch recipes
+    fetch("/api/recipes")
+      .then((response) => response.json())
+      .then((data) => setRecipes(data))
+      .catch((error) => console.error("Error fetching recipes:", error));
+
+    // Fetch users
+    fetch("/api/users")
+      .then((response) => response.json())
+      .then((data) => setUsers(data))
+      .catch((error) => console.error("Error fetching users:", error));
+  }, []); // Empty dependency array ensures the effect runs only once on mount
 
   return (
     <Router>
