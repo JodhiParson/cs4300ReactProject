@@ -46,12 +46,12 @@ function App() {
       token = "";
     }
     const tokenResponse = await axios.post(
-      "https://localhost:8081/tokenIsValid",
+      "http://localhost:8081/tokenIsValid",
       null,
       {headers: {"x-auth-token": token } }
     );
     if (tokenResponse.data) {
-      const userRes = await axios.get("https://localhost:8081/", {
+      const userRes = await axios.get("http://localhost:8081/", {
         headers: {"x-auth-token": token },
       });
       setUserdata({

@@ -31,11 +31,11 @@ const SignUpForm = ({ onLogin }) => {
     setLoading(true);
     try {
 
-      const newUser = { email, password, confirmPassword, username };
+      const newUser = { userName, password, confirmPassword };
       
       axios.post("https://localhost:8081/api/users/signup", newUser);
       const loginRes = axios.post("https://localhost:8081/api/users/login", {
-        email,
+        userName,
         password,
       });
       setUserData({
@@ -92,14 +92,7 @@ const SignUpForm = ({ onLogin }) => {
                                 <Form.Control 
                                 type="username" 
                                 required 
-                                onChange={e => setUsername(e. target.value)}/>
-                            </Form.Group>
-                            <Form.Group id="email">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control 
-                                type="email" 
-                                required 
-                                onChange={e => setEmail(e.target.value)}/>
+                                onChange={e => setUserName(e. target.value)}/>
                             </Form.Group>
                             <Form.Group id="password">
                                 <Form.Label>Password</Form.Label>
