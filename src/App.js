@@ -43,13 +43,14 @@ function App() {
       token = "";
     }
 
+    try {
     const tokenResponse = await axios.post(
-      "http://localhost:8081/tokenIsValid",
+      "http://localhost:3000/tokenIsValid",
       null,
       {headers: {"x-auth-token": token } }
     );
     if (tokenResponse.data) {
-      const userRes = await axios.get("http://localhost:8081/", {
+      const userRes = await axios.get("http://localhost:3000/", {
         headers: {"x-auth-token": token },
       });
       setUserdata({
@@ -57,7 +58,10 @@ function App() {
         user: userRes.data,
       });
     }
-};
+} catch (error) {
+  console.error("Error during login check", error);
+}
+    };
     checkLoggedIn();
   }, []);
 

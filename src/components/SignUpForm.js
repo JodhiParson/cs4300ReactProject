@@ -24,17 +24,17 @@ const SignUpForm = ({ onLogin }) => {
   };
   const handleConfirmPassword = (event) => {
     setConfirmPassword(event.target.value);
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
     try {
-
       const newUser = { userName, password, confirmPassword };
       
-      axios.post("https://localhost:8081/api/users/signup", newUser);
-      const loginRes = axios.post("https://localhost:8081/api/users/login", {
+      axios.post("http://localhost:3000/api/users/signup", newUser);
+
+      const loginRes = axios.post("http://localhost:3000/api/users/login", {
         userName,
         password,
       });
@@ -48,8 +48,8 @@ const SignUpForm = ({ onLogin }) => {
     } catch (err) {
       setLoading(false);
       err.response.data.msg && setError(err.response.data.msg);
-    }
-  }
+    };
+  };
   //   if (userName.trim() === '') {
   //     alert('Enter your SignUp Information!!');
   //     return;

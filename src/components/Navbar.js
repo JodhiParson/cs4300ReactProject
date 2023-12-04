@@ -16,9 +16,9 @@ function Navbar() {
     return (
       <nav>
         <div className="brand">Recipe Finder</div>
-		    <ul class="navLinks">
-		    <li class="navItems"><Link to="/">Home</Link></li>
-        <li class="navItems"><Link to="/LoginPage">Login</Link></li>
+		    <ul className="navLinks">
+		    <li className="navItems"><Link to="/">Home</Link></li>
+        <li className="navItems"><Link to="/LoginPage">Login</Link></li>
 		</ul>
     </nav>
     )
@@ -26,9 +26,9 @@ function Navbar() {
   return( [
     <nav>
       <div className="brand">Recipe Finder</div>
-		  <ul class="navLinks">
-		  <li class="navItems"><Link to="/">Home</Link></li>
-      <li class="navItems"><Link to="/">Logout</Link></li>
+		  <ul className="navLinks">
+		  <li className="navItems"><Link to="/">Home</Link></li>
+      <li className="navItems"><Link to="/">Logout</Link></li>
 		</ul>
     </nav>
   ])

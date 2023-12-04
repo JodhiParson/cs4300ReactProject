@@ -25,7 +25,7 @@ const LoginForm = ({ onLogin }) => {
     setLoading(true);
     try {
       const loginUser = {userName, password };
-      const loginRes = axios.post("https://localhost:8081/api/users/login", loginUser)
+      const loginRes = axios.post("http://localhost:3000/api/users/login", loginUser)
       setUserData({
         token: loginRes.data.token,
         user: loginRes.data.user,
@@ -82,14 +82,24 @@ const LoginForm = ({ onLogin }) => {
                         {error && <Alert variant="danger">{error}</Alert>}
                         <Form onSubmit={handleSubmit}>
                             <Form.Group id="username">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control type="text" required onChange={e => setUserName(e.target.value)}/>
+                                <Form.Label>Username: </Form.Label>
+                                <Form.Control 
+                                  type="text" 
+                                  required 
+                                  onChange={e => setUserName(e.target.value)}
+                                  />
                             </Form.Group>
                             <Form.Group id="password">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" required onChange={e=> setPassword(e.target.value)}/>
+                                <Form.Label>Password: </Form.Label>
+                                <Form.Control 
+                                type="password" 
+                                required onChange={e=> setPassword(e.target.value)}
+                                />
                             </Form.Group>
-                            <Button disabled={loading} className="w-100 mt-2" type="submit">
+                            <Button 
+                            disabled={loading} 
+                            className="w-100 mt-2" 
+                            type="submit">
                             Log In
                             </Button>
                         </Form>

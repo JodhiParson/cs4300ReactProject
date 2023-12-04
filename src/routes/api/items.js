@@ -4,9 +4,7 @@ const router = express.Router();
 const Item = require('../../models/foodModel');
 
 router.get('/', (req,res) => {
-  Item.find()
-    .then((items) => res.json(items))
-    .catch((err) => res.status(404).json({ noitemsfound: 'No Items found'}));
+  res.json({message: 'This is the items route.'});
 });
 router.get('/:id', (req,res) => {
   Item.findById(req.params.id)
