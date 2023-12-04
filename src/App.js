@@ -11,6 +11,7 @@ import AddpageNavbar from './components/AddpageNavbar';
 import LoginPageNavbar from './components/LoginPageNavbar';
 import axios from 'axios';
 import './App.css';
+import UserContext from "./context/UserContext";
 
 function App() {
   const [userData, setUserdata] = useState({
@@ -18,11 +19,7 @@ function App() {
     user: undefined,
   });
   // Initialize recipes state with preset recipes
-  const [recipes, setRecipes] = useState([
-    {
-    
-    },
-  ]);
+  const [recipes, setRecipes] = useState([]);
 
   const [users, setUsers] = useState([]);
 
@@ -45,6 +42,7 @@ function App() {
       localStorage.setItem("auth-token", "");
       token = "";
     }
+
     const tokenResponse = await axios.post(
       "http://localhost:8081/tokenIsValid",
       null,
@@ -59,13 +57,14 @@ function App() {
         user: userRes.data,
       });
     }
-  };
+};
     checkLoggedIn();
   }, []);
 
   // useEffect to fetch data when the component mounts
   
   return (
+    <UserContext.Provider value = {{userData, setUserdata}}>
     <Router>
       <div>
         <Routes>
@@ -117,6 +116,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </UserContext.Provider>
   );
           };
 

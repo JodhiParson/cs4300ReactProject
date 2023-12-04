@@ -102,7 +102,7 @@ const SignUpForm = ({ onLogin }) => {
                                 onChange={e=> setPassword(e.target.value)}/>
                             </Form.Group>
                             <Form.Group id="password-confirm">
-                                <Form.Label>confirmPassword</Form.Label>
+                                <Form.Label>Confirm Password</Form.Label>
                                 <Form.Control 
                                 type="password" 
                                 required 
