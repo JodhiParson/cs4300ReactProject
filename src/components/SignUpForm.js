@@ -1,123 +1,169 @@
-import React, {useState, useContext} from 'react';
-import { Form, Button, Card, Alert, Container } from "react-bootstrap";
-import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
-import UserContext from "../context/UserContext";
+import { useRef, useState, useEffect } from "react";
+import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
 
-const SignUpForm = ({ onLogin }) => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+// Allow any characters for usernames
+const USER_REGEX = /^.{1,}$/;
 
-  const {setUserData } = useContext(UserContext);
+// Allow any characters for passwords
+const PWD_REGEX = /^.{1,}$/;
+const REGISTER_URL = '/register';
 
-  const handleNameChange = (event) => {
-    setUserName(event.target.value);
-  };
+const Register = () => {
+    const userRef = useRef();
+    const errRef = useRef();
 
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
-  };
-  const handleConfirmPassword = (event) => {
-    setConfirmPassword(event.target.value);
-  };
+    const [user, setUser] = useState('');
+    const [validName, setValidName] = useState(false);
+    const [userFocus, setUserFocus] = useState(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setLoading(true);
-    try {
-      const newUser = { userName, password, confirmPassword };
-      
-      axios.post("http://localhost:3000/api/users/signup", newUser);
+    const [pwd, setPwd] = useState('');
+    const [validPwd, setValidPwd] = useState(false);
+    const [pwdFocus, setPwdFocus] = useState(false);
 
-      const loginRes = axios.post("http://localhost:3000/api/users/login", {
-        userName,
-        password,
-      });
-      setUserData({
-        token: loginRes.data.token,
-        user: loginRes.data.user,
-      });
-      localStorage.setItem("auth-token", loginRes.data.token);
-      setLoading(false);
-      navigate('/');
-    } catch (err) {
-      setLoading(false);
-      err.response.data.msg && setError(err.response.data.msg);
-    };
-  };
-  //   if (userName.trim() === '') {
-  //     alert('Enter your SignUp Information!!');
-  //     return;
-  //   }
+    const [matchPwd, setMatchPwd] = useState('');
+    const [validMatch, setValidMatch] = useState(false);
+    const [matchFocus, setMatchFocus] = useState(false);
 
-  // if (password !==confirmPassword) {
-  //   alert('Passwords do not match');
-  //   return;
-  // }
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
 
-  //   const newUser = {
-  //     id: Math.random().toString(),
-  //     user: userName,
-  //     password: password,
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
 
-  //   };
+    useEffect(() => {
+        setValidName(USER_REGEX.test(user));
+    }, [user])
 
-  //   onLogin(newUser);
+    useEffect(() => {
+        setValidPwd(PWD_REGEX.test(pwd));
+        setValidMatch(pwd === matchPwd);
+    }, [pwd, matchPwd])
 
-  //   // Clear form fields after adding recipe
-  //   setUserName('');
-  //   setPassword('');
-  //   setConfirmPassword('');
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, pwd, matchPwd])
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // if button enabled with JS hack
+        const v1 = USER_REGEX.test(user);
+        const v2 = PWD_REGEX.test(pwd);
+        if (!v1 || !v2) {
+            setErrMsg("Invalid Entry");
+            return;
+        }
+        try {
+            const response = await axios.post(REGISTER_URL,
+                JSON.stringify({ user, pwd }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(response?.data);
+            console.log(response?.accessToken);
+            console.log(JSON.stringify(response))
+            setSuccess(true);
+            //clear state and controlled inputs
+            //need value attrib on inputs for this
+            setUser('');
+            setPwd('');
+            setMatchPwd('');
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 409) {
+                setErrMsg('Username Taken');
+            } else {
+                setErrMsg('Registration Failed')
+            }
+            errRef.current.focus();
+        }
+    }
 
-  return (
-    <Container
-    className="d-flex align-items-center justify-content-center"
-    style={{ minHeight: "100vh" }}
-    >
-        <div className="w-100" style={{ maxWidth: "400px" }}>
-         <>
-            <Card>
-             <Card.Body>
-                <h2 className="text-center mb-4">Sign Up</h2>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleSubmit}>
-                    <Form.Group id="username">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control 
-                                type="username" 
-                                required 
-                                onChange={e => setUserName(e. target.value)}/>
-                            </Form.Group>
-                            <Form.Group id="password">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control 
-                                type="password" 
-                                required 
-                                onChange={e=> setPassword(e.target.value)}/>
-                            </Form.Group>
-                            <Form.Group id="password-confirm">
-                                <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control 
-                                type="password" 
-                                required 
-                                onChange={e=> setPassword(e.target.value)}/>
-                            </Form.Group>
-                            <Button disabled={loading} className="w-100 mt-2" type="submit">
-                            Sign Up
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card>
-            <div className="w-100 text-center ,mt-2">Already have an account?<Link to="signup">Log in</Link></div>
+    return (
+        <>
+            {success ? (
+                <section>
+                    <h1>Success!</h1>
+                    <p>
+                        <a href="#">Sign In</a>
+                    </p>
+                </section>
+            ) : (
+                <section>
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <h1>Register</h1>
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="username">
+                            Username: 
+                        </label>
+                        <input
+                            type="text"
+                            id="username"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUser(e.target.value)}
+                            value={user}
+                            required
+                            aria-invalid={validName ? "false" : "true"}
+                            aria-describedby="uidnote"
+                            onFocus={() => setUserFocus(true)}
+                            onBlur={() => setUserFocus(false)}
+                        />
+                        <br />
+
+                        <label htmlFor="password">
+                            Password:
+                            
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
+                            required
+                            aria-invalid={validPwd ? "false" : "true"}
+                            aria-describedby="pwdnote"
+                            onFocus={() => setPwdFocus(true)}
+                            onBlur={() => setPwdFocus(false)}
+                        />
+                        <br />
+                        <label htmlFor="confirm_pwd">
+                            Confirm Password:
+                        </label>
+                        <input
+                            type="password"
+                            id="confirm_pwd"
+                            onChange={(e) => setMatchPwd(e.target.value)}
+                            value={matchPwd}
+                            required
+                            aria-invalid={validMatch ? "false" : "true"}
+                            aria-describedby="confirmnote"
+                            onFocus={() => setMatchFocus(true)}
+                            onBlur={() => setMatchFocus(false)}
+                        />
+                        <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            Must match the first password input field.
+                        </p>
+
+                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                    </form>
+                    <p>
+                        Already registered?<br />
+                        <span className="line">
+                            {/*put router link here*/}
+                            <a href="#">Sign In</a>
+                        </span>
+                    </p>
+                </section>
+            )}
         </>
-    </div>
-</Container>
-);
-  };
-export default SignUpForm;
+    )
+}
+
+export default Register

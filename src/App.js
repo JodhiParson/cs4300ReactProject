@@ -11,7 +11,7 @@ import AddpageNavbar from './components/AddpageNavbar';
 import LoginPageNavbar from './components/LoginPageNavbar';
 import axios from 'axios';
 import './App.css';
-import UserContext from "./context/UserContext";
+import UserContext from "./context/AuthProvider";
 
 function App() {
   const [userData, setUserdata] = useState({
